@@ -9,22 +9,21 @@
 WITH Customers AS (
 
     SELECT 
-        id AS CustomerId
-        ,first_name AS FirstName
-        ,last_name AS LastName
-    FROM default.jaffle_shop_customers
-    ORDER BY CustomerId
-    LIMIT 5
+        CustomerId
+        ,FirstName
+        ,LastName
+    FROM {{ ref('stg_jaffle_shop_customers') }}
+        -- Can SELECT * but best practice is to limit what is queried to only those columns required as the source may change in future
     
 ),
 Orders AS (
 
     SELECT 
-        id AS OrderId
-        ,user_id AS CustomerId
-        ,order_date AS OrderDate
-        ,status AS Status
-    FROM default.jaffle_shop_orders
+        OrderId
+        ,CustomerId
+        ,OrderDate
+        ,Status
+    FROM {{ ref('stg_jaffle_shop_orders') }}
 
 ),
 CustomerOrders AS (
