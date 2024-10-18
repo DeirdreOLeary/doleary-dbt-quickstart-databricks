@@ -1,3 +1,11 @@
+{{
+
+    config(
+        materialized='table'
+    )
+
+}}
+
 WITH Customers AS (
 
     SELECT 
