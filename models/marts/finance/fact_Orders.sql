@@ -3,6 +3,7 @@ WITH Orders AS (
     SELECT 
         OrderId
         ,CustomerId
+        ,OrderDate
     FROM {{ ref('stg_jaffle_shop_orders') }}
 
 ),
@@ -19,6 +20,7 @@ Payments AS (
 SELECT
     Orders.OrderId
     ,Orders.CustomerId
+    ,Orders.OrderDate
     ,COALESCE(Payments.PaymentAmount, 0) AS PaymentAmount
 FROM Orders
 LEFT JOIN Payments USING (OrderId)
