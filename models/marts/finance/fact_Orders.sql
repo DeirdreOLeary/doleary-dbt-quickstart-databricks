@@ -10,8 +10,10 @@ Payments AS (
 
     SELECT
         OrderId
-        ,PaymentAmount
+        ,SUM(PaymentAmount) AS PaymentAmount
     FROM {{ ref('stg_stripe_payments') }}
+    WHERE Status = 'success'
+    GROUP BY OrderId
 
 )
 SELECT
