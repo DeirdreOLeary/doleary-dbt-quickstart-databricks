@@ -17,3 +17,8 @@ models:
         tests:
           - accepted_values:
               values: ['shipped', 'completed', 'return_pending', 'placed', 'returned']
+      - name: CustomerId
+        tests:
+          - relationships:
+              to: ref('stg_jaffle_shop_customers')
+              field: CustomerId

@@ -1,3 +1,5 @@
+-- Test that all orders have a positive amount (i.e. returns are not greater than purchases per OrderId)
+
 WITH Payments AS (
     SELECT *
     FROM {{ ref('stg_stripe_payments') }}
