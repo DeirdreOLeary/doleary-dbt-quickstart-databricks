@@ -6,6 +6,11 @@ sources:
     schema: default
     tables:
       - name: stripe_payments
+        columns:
+          - name: id
+            tests:
+              - unique
+              - not_null
         loaded_at_field: _batched_at
         freshness: 
           error_after: {count: 24, period: hour}
