@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: stg_jaffle_shop_customers
+    description: One unique customer per row.
+    columns:
+      - name: CustomerId
+        description: Primary key.
+        tests:
+          - unique
+          - not_null
+  - name: stg_jaffle_shop_orders
+    description: One order per row.
+    columns:
+      - name: OrderId
+        description: Primary key.
+        tests:
+          - unique
+          - not_null
+      - name: Status
+        description: "{{ doc('order_status') }}"
+        tests:
+          - accepted_values:
+              values: ['shipped', 'completed', 'return_pending', 'placed', 'returned']
+      - name: CustomerId
+        tests:
+          - relationships:
+              to: ref('stg_jaffle_shop_customers')
+              field: CustomerId
